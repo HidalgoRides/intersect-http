@@ -2,10 +2,11 @@
 
 namespace Intersect\Http;
 
+use Intersect\Core\ClosureInvoker;
+use Intersect\Core\Container;
 use Intersect\Core\Http\Request;
 use Intersect\Core\Http\Response;
 use Intersect\Core\MethodInvoker;
-use Intersect\Core\ClosureInvoker;
 use Intersect\Http\ExceptionHandler;
 use Intersect\Http\Router\RouteRegistry;
 use Intersect\Http\Router\RouteResolver;
@@ -14,6 +15,9 @@ class RequestHandler {
 
     /** @var ClosureInvoker $closureInvoker */
     private $closureInvoker;
+
+    /** @var Container $container */
+    private $container;
 
     /** @var ExceptionHandler */
     private $exceptionHandler;
@@ -29,8 +33,9 @@ class RequestHandler {
     /**
      * RequestHandler constructor.
      */
-    public function __construct(RouteRegistry $routeRegistry, ClosureInvoker $closureInvoker, MethodInvoker $methodInvoker, ExceptionHandler $customExceptionHandler = null)
+    public function __construct(Container $container, RouteRegistry $routeRegistry, ClosureInvoker $closureInvoker, MethodInvoker $methodInvoker, ExceptionHandler $customExceptionHandler = null)
     {
+        $this->container = $container;
         $this->closureInvoker = $closureInvoker;
         $this->methodInvoker = $methodInvoker;
 
@@ -73,7 +78,7 @@ class RequestHandler {
                     throw new \Exception('Controller not found: [name: ' . $routeAction->getController() . ']');
                 }
 
-                $controller = new $controllerClass();
+                $controller = $this->container->resolveClass($controllerClass);
 
                 if (!method_exists($controller, $routeAction->getMethod()))
                 {

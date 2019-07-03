@@ -13,28 +13,31 @@ class RouteResolverTest extends TestCase {
     /** @var RouteResolver $routeResolver */
     private $routeResolver;
 
+    /** @var RouteRegistry */
+    private $routeRegistry;
+
     protected function setUp()
     {
-        $routeRegistry = new RouteRegistry();
-        $routeRegistry->registerRoute(Route::get('/classpath', 'Tests\Controllers\TestController#index'));
-        $routeRegistry->registerRoute(Route::get('/classpath-with-params/:id', 'Tests\Controllers\TestController#index2'));
-        $routeRegistry->registerRoute(Route::get('/closure', (function() {})));
-        $routeRegistry->registerRoute(Route::get('/closure-with-params/:id', (function() {})));
+        $this->routeRegistry = new RouteRegistry();
+        $this->routeRegistry->registerRoute(Route::get('/classpath', 'Tests\Controllers\TestController#index'));
+        $this->routeRegistry->registerRoute(Route::get('/classpath-with-params/:id', 'Tests\Controllers\TestController#index2'));
+        $this->routeRegistry->registerRoute(Route::get('/closure', (function() {})));
+        $this->routeRegistry->registerRoute(Route::get('/closure-with-params/:id', (function() {})));
 
-        $routeRegistry->registerRouteGroup(RouteGroup::for('test', [
+        $this->routeRegistry->registerRouteGroup(RouteGroup::for('test', [
             Route::get('/group', 'Tests\Controllers\TestController#group')
         ]));
 
-        $routeRegistry->registerRouteGroup(RouteGroup::for('prefix', [
+        $this->routeRegistry->registerRouteGroup(RouteGroup::for('prefix', [
             Route::get('/test', 'Tests\Controllers\TestController#prefix'),
             Route::get('/test2', 'Tests\Controllers\TestController#prefix2')
         ], ['prefix' => 'prefix']));
 
-        $routeRegistry->registerRoute(Route::get('/extra', 'Tests\Controllers\TestController#extra', [
+        $this->routeRegistry->registerRoute(Route::get('/extra', 'Tests\Controllers\TestController#extra', [
             'before' => 'test'
         ]));
 
-        $this->routeResolver = new RouteResolver($routeRegistry);
+        $this->routeResolver = new RouteResolver($this->routeRegistry);
     }
 
     public function test_resolve_routeNotFound() 
@@ -43,6 +46,34 @@ class RouteResolverTest extends TestCase {
         $route = $this->routeResolver->resolve('GET', '/not-found');
 
         $this->assertNull($route);
+    }
+
+    public function test_resolve_routeAsIndexPageWithVariablePassed() 
+    {
+        $this->routeRegistry->registerRoute(Route::get('/:id', 'Tests\Controllers\TestController#index'));
+
+        /** @var Route $route */
+        $route = $this->routeResolver->resolve('GET', '/:id');
+
+        $this->assertNotNull($route);
+        $this->assertFalse($route->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
+        $this->assertEquals('index', $route->getMethod());
+        $this->assertCount(1, $route->getNamedParameters());
+    }
+
+    public function test_resolve_routeAsIndexPageWithoutVariablePassed() 
+    {
+        $this->routeRegistry->registerRoute(Route::get('/:id', 'Tests\Controllers\TestController#index'));
+
+        /** @var Route $route */
+        $route = $this->routeResolver->resolve('GET', '/');
+
+        $this->assertNotNull($route);
+        $this->assertFalse($route->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
+        $this->assertEquals('index', $route->getMethod());
+        $this->assertCount(1, $route->getNamedParameters());
     }
 
     public function test_resolve_routeAsClassPath() 

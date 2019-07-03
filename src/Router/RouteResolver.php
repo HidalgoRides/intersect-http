@@ -38,12 +38,14 @@ class RouteResolver {
         {
             $namedParameters = [];
 
+            $path = rtrim($path, '/');
+
             if (preg_match_all('#:([a-z0-9]+)/?#i', $path, $placeholders))
             {
                 foreach ($placeholders[1] as $placeholder)
                 {
                     $namedParameters[$placeholder] = null;
-                    $path = str_replace(':' . $placeholder, '(?P<' . $placeholder . '>[^/$]+)', $path);
+                    $path = str_replace(':' . $placeholder, '+(?P<' . $placeholder . '>[^/$]+)?', $path);
                 }
             }
 

@@ -48,12 +48,26 @@ class RouteResolverTest extends TestCase {
         $this->assertNull($route);
     }
 
+    public function test_resolve_routeAsIndexPage() 
+    {
+        $this->routeRegistry->registerRoute(Route::get('/', 'Tests\Controllers\TestController#index'));
+
+        /** @var Route $route */
+        $route = $this->routeResolver->resolve('GET', '/');
+
+        $this->assertNotNull($route);
+        $this->assertFalse($route->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
+        $this->assertEquals('index', $route->getMethod());
+        $this->assertCount(0, $route->getNamedParameters());
+    }
+
     public function test_resolve_routeAsIndexPageWithVariablePassed() 
     {
         $this->routeRegistry->registerRoute(Route::get('/:id', 'Tests\Controllers\TestController#index'));
 
         /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/:id');
+        $route = $this->routeResolver->resolve('GET', '/123');
 
         $this->assertNotNull($route);
         $this->assertFalse($route->getIsCallable());

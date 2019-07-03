@@ -38,7 +38,10 @@ class RouteResolver {
         {
             $namedParameters = [];
 
-            $path = rtrim($path, '/');
+            if ($path !== '/')
+            {
+                $path = rtrim($path, '/');
+            }
 
             if (preg_match_all('#:([a-z0-9]+)/?#i', $path, $placeholders))
             {

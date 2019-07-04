@@ -32,6 +32,11 @@ class RouteResolver {
         }
 
         $routeAction = null;
+        
+        if (array_key_exists($baseUri, $registeredRoutes))
+        {
+            return $this->getRouteActionFromRoute($registeredRoutes[$baseUri]);
+        }
 
         /** @var Route $route */
         foreach ($registeredRoutes as $path => $route)
@@ -67,10 +72,36 @@ class RouteResolver {
                 }
             }
 
-            $routeAction = $route->getRouteAction();
+            $routeAction = $this->getRouteActionFromRoute($route);
             $routeAction->setNamedParameters($namedParameters);
 
             break;
+        }
+
+        return $routeAction;
+    }
+
+    private function getRouteActionFromRoute(Route $route)
+    {
+        $routeAction = new RouteAction();
+        $routeAction->setExtraOptions($route->getExtraOptions());
+
+        $action = $route->getAction();
+
+        if ($action instanceof \Closure)
+        {
+            $routeAction->setMethod($action);
+            $routeAction->setIsCallable(true);
+        }
+        else
+        {
+            $methodParts = explode('#', $action);
+
+            if (isset($methodParts[1]))
+            {
+                $routeAction->setController($methodParts[0]);
+                $routeAction->setMethod($methodParts[1]);
+            }
         }
 
         return $routeAction;

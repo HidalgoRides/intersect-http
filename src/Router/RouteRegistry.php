@@ -20,8 +20,6 @@ class RouteRegistry {
      */
     public function get($method, $path = null)
     {
-        $method = strtoupper($method);
-
         $routes = (array_key_exists($method, $this->registeredRoutes) ? $this->registeredRoutes[$method] : []);
 
         if (is_null($routes) || count($routes) == 0 || is_null($path))
@@ -37,7 +35,7 @@ class RouteRegistry {
      */
     public function registerRoute(Route $route)
     {
-        $method = strtoupper($route->getMethod());
+        $method = $route->getMethod();
         $this->registeredRoutes[$method][$route->getPath()] = $route;
     }
 
@@ -58,8 +56,7 @@ class RouteRegistry {
 
                 if (count($extraOptions) > 0)
                 {
-                    $routeAction = $route->getRouteAction();
-                    $routeAction->setExtraOptions(array_merge_recursive($extraOptions, $routeAction->getExtraOptions()));
+                    $route->setExtraOptions(array_merge_recursive($extraOptions, $route->getExtraOptions()));
                 }
 
                 $this->registerRoute($route);

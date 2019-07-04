@@ -2,11 +2,12 @@
 
 namespace Tests\Http\Router;
 
+use PHPUnit\Framework\TestCase;
 use Intersect\Http\Router\Route;
 use Intersect\Http\Router\RouteGroup;
+use Intersect\Http\Router\RouteAction;
 use Intersect\Http\Router\RouteRegistry;
 use Intersect\Http\Router\RouteResolver;
-use PHPUnit\Framework\TestCase;
 
 class RouteResolverTest extends TestCase {
 
@@ -42,143 +43,143 @@ class RouteResolverTest extends TestCase {
 
     public function test_resolve_routeNotFound() 
     {
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/not-found');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/not-found');
 
-        $this->assertNull($route);
+        $this->assertNull($routeAction);
     }
 
     public function test_resolve_routeAsIndexPage() 
     {
         $this->routeRegistry->registerRoute(Route::get('/', 'Tests\Controllers\TestController#index'));
 
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/');
 
-        $this->assertNotNull($route);
-        $this->assertFalse($route->getIsCallable());
-        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
-        $this->assertEquals('index', $route->getMethod());
-        $this->assertCount(0, $route->getNamedParameters());
+        $this->assertNotNull($routeAction);
+        $this->assertFalse($routeAction->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $routeAction->getController());
+        $this->assertEquals('index', $routeAction->getMethod());
+        $this->assertCount(0, $routeAction->getNamedParameters());
     }
 
     public function test_resolve_routeAsIndexPageWithVariablePassed() 
     {
         $this->routeRegistry->registerRoute(Route::get('/:id', 'Tests\Controllers\TestController#index'));
 
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/123');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/123');
 
-        $this->assertNotNull($route);
-        $this->assertFalse($route->getIsCallable());
-        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
-        $this->assertEquals('index', $route->getMethod());
-        $this->assertCount(1, $route->getNamedParameters());
+        $this->assertNotNull($routeAction);
+        $this->assertFalse($routeAction->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $routeAction->getController());
+        $this->assertEquals('index', $routeAction->getMethod());
+        $this->assertCount(1, $routeAction->getNamedParameters());
     }
 
     public function test_resolve_routeAsIndexPageWithoutVariablePassed() 
     {
         $this->routeRegistry->registerRoute(Route::get('/:id', 'Tests\Controllers\TestController#index'));
 
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/');
 
-        $this->assertNotNull($route);
-        $this->assertFalse($route->getIsCallable());
-        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
-        $this->assertEquals('index', $route->getMethod());
-        $this->assertCount(1, $route->getNamedParameters());
+        $this->assertNotNull($routeAction);
+        $this->assertFalse($routeAction->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $routeAction->getController());
+        $this->assertEquals('index', $routeAction->getMethod());
+        $this->assertCount(1, $routeAction->getNamedParameters());
     }
 
     public function test_resolve_routeAsClassPath() 
     {
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/classpath');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/classpath');
 
-        $this->assertNotNull($route);
-        $this->assertFalse($route->getIsCallable());
-        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
-        $this->assertEquals('index', $route->getMethod());
-        $this->assertCount(0, $route->getNamedParameters());
+        $this->assertNotNull($routeAction);
+        $this->assertFalse($routeAction->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $routeAction->getController());
+        $this->assertEquals('index', $routeAction->getMethod());
+        $this->assertCount(0, $routeAction->getNamedParameters());
     }
 
     public function test_resolve_routeAsClassPathWithParameters() 
     {
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/classpath-with-params/123');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/classpath-with-params/123');
 
-        $this->assertNotNull($route);
-        $this->assertFalse($route->getIsCallable());
-        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
-        $this->assertEquals('index2', $route->getMethod());
-        $this->assertCount(1, $route->getNamedParameters());
-        $this->assertTrue(array_key_exists('id', $route->getNamedParameters()));
-        $this->assertEquals(123, $route->getNamedParameters()['id']);
+        $this->assertNotNull($routeAction);
+        $this->assertFalse($routeAction->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $routeAction->getController());
+        $this->assertEquals('index2', $routeAction->getMethod());
+        $this->assertCount(1, $routeAction->getNamedParameters());
+        $this->assertTrue(array_key_exists('id', $routeAction->getNamedParameters()));
+        $this->assertEquals(123, $routeAction->getNamedParameters()['id']);
     }
 
     public function test_resolve_routeAsClosure() 
     {
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/closure');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/closure');
 
-        $this->assertNotNull($route);
-        $this->assertTrue($route->getIsCallable());
-        $this->assertNull($route->getController());
-        $this->assertNotNull($route->getMethod());
-        $this->assertTrue($route->getMethod() instanceof \Closure);
+        $this->assertNotNull($routeAction);
+        $this->assertTrue($routeAction->getIsCallable());
+        $this->assertNull($routeAction->getController());
+        $this->assertNotNull($routeAction->getMethod());
+        $this->assertTrue($routeAction->getMethod() instanceof \Closure);
     }
 
     public function test_resolve_routeAsClosureWithParameters() 
     {
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/closure-with-params/123');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/closure-with-params/123');
 
-        $this->assertNotNull($route);
-        $this->assertTrue($route->getIsCallable());
-        $this->assertNull($route->getController());
-        $this->assertNotNull($route->getMethod());
-        $this->assertTrue($route->getMethod() instanceof \Closure);
-        $this->assertCount(1, $route->getNamedParameters());
-        $this->assertTrue(array_key_exists('id', $route->getNamedParameters()));
-        $this->assertEquals(123, $route->getNamedParameters()['id']);
+        $this->assertNotNull($routeAction);
+        $this->assertTrue($routeAction->getIsCallable());
+        $this->assertNull($routeAction->getController());
+        $this->assertNotNull($routeAction->getMethod());
+        $this->assertTrue($routeAction->getMethod() instanceof \Closure);
+        $this->assertCount(1, $routeAction->getNamedParameters());
+        $this->assertTrue(array_key_exists('id', $routeAction->getNamedParameters()));
+        $this->assertEquals(123, $routeAction->getNamedParameters()['id']);
     }
 
     public function test_resolve_routeInsideOfRouteGroup() 
     {
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/group');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/group');
 
-        $this->assertNotNull($route);
-        $this->assertFalse($route->getIsCallable());
-        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
-        $this->assertEquals('group', $route->getMethod());
-        $this->assertCount(0, $route->getNamedParameters());
+        $this->assertNotNull($routeAction);
+        $this->assertFalse($routeAction->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $routeAction->getController());
+        $this->assertEquals('group', $routeAction->getMethod());
+        $this->assertCount(0, $routeAction->getNamedParameters());
     }
 
     public function test_resolve_routeRouteGroupWithPrefix() 
     {
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/prefix/test');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/prefix/test');
 
-        $this->assertNotNull($route);
-        $this->assertFalse($route->getIsCallable());
-        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
-        $this->assertEquals('prefix', $route->getMethod());
-        $this->assertCount(0, $route->getNamedParameters());
+        $this->assertNotNull($routeAction);
+        $this->assertFalse($routeAction->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $routeAction->getController());
+        $this->assertEquals('prefix', $routeAction->getMethod());
+        $this->assertCount(0, $routeAction->getNamedParameters());
     }
 
     public function test_resolve_routeWithExtraOptions() 
     {
-        /** @var Route $route */
-        $route = $this->routeResolver->resolve('GET', '/extra');
+        /** @var RouteAction $routeAction */
+        $routeAction = $this->routeResolver->resolve('GET', '/extra');
 
-        $this->assertNotNull($route);
-        $this->assertFalse($route->getIsCallable());
-        $this->assertEquals('Tests\Controllers\TestController', $route->getController());
-        $this->assertEquals('extra', $route->getMethod());
-        $this->assertCount(0, $route->getNamedParameters());
-        $this->assertCount(1, $route->getExtraOptions());
-        $this->assertArrayHasKey('before', $route->getExtraOptions());
+        $this->assertNotNull($routeAction);
+        $this->assertFalse($routeAction->getIsCallable());
+        $this->assertEquals('Tests\Controllers\TestController', $routeAction->getController());
+        $this->assertEquals('extra', $routeAction->getMethod());
+        $this->assertCount(0, $routeAction->getNamedParameters());
+        $this->assertCount(1, $routeAction->getExtraOptions());
+        $this->assertArrayHasKey('before', $routeAction->getExtraOptions());
     }
 
 }

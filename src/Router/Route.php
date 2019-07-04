@@ -2,15 +2,12 @@
 
 namespace Intersect\Http\Router;
 
-use Intersect\Http\Router\RouteAction;
-
 class Route {
 
     private $action;
     private $method;
     private $path;
-    /** @var RouteAction */
-    private $routeAction;
+    private $extraOptions = [];
     
     public static function get($path, $action, $extraOptions = [])
     {
@@ -35,41 +32,15 @@ class Route {
     private static function newRouteForMethod($method, $path, $action, $extraOptions = [])
     {
         $route = new Route();
-        $route->setMethod(strtoupper($method));
+        $route->setMethod($method);
         $route->setPath($path);
         $route->setAction($action);
-
-        $routeAction = $route->getRouteAction();
-        $routeAction->setExtraOptions($extraOptions);
-
-        if ($action instanceof \Closure)
-        {
-            $routeAction->setMethod($action);
-            $routeAction->setIsCallable(true);
-        }
-        else
-        {
-            $methodParts = explode('#', $action);
-
-            if (isset($methodParts[1]))
-            {
-                $routeAction->setController($methodParts[0]);
-                $routeAction->setMethod($methodParts[1]);
-            }
-        }
+        $route->setExtraOptions($extraOptions);
 
         return $route;
     }
 
-    private function __construct()
-    {
-        $this->routeAction = new RouteAction();
-    }
-
-    public function getRouteAction()
-    {
-        return $this->routeAction;
-    }
+    private function __construct() {}
 
     public function getAction()
     {
@@ -99,6 +70,16 @@ class Route {
     public function setPath($path)
     {
         $this->path = $path;
+    }
+
+    public function getExtraOptions()
+    {
+        return $this->extraOptions;
+    }
+
+    public function setExtraOptions(array $extraOptions)
+    {
+        $this->extraOptions = $extraOptions;
     }
 
 }

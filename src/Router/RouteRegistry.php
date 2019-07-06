@@ -5,6 +5,7 @@ namespace Intersect\Http\Router;
 class RouteRegistry {
 
     protected $registeredRoutes = [];
+    protected $dynamicRoutes = [];
 
     /**
      * @return array
@@ -12,6 +13,11 @@ class RouteRegistry {
     public function getAll()
     {
         return $this->registeredRoutes;
+    }
+
+    public function getDynamicRoutes()
+    {
+        return $this->dynamicRoutes;
     }
 
     /**
@@ -36,7 +42,15 @@ class RouteRegistry {
     public function registerRoute(Route $route)
     {
         $method = $route->getMethod();
-        $this->registeredRoutes[$method][$route->getPath()] = $route;
+        $path = $route->getPath();
+
+        if (strpos($path, ':') !== false)
+        {
+            $pathPaths = explode('/', $path);
+            $this->dynamicRoutes[count($pathPaths)][$path] = $route;
+        }
+
+        $this->registeredRoutes[$method][$path] = $route;
     }
 
     public function registerRouteGroup(RouteGroup $routeGroup)

@@ -38,6 +38,18 @@ class RouteResolver {
             return $this->getRouteActionFromRoute($registeredRoutes[$baseUri]);
         }
 
+        $dynamicRoutes = $this->routeRegistry->getDynamicRoutes();
+
+        $baseUriParts = explode('/', $baseUri);
+        $baseUriPartsCount = count($baseUriParts);
+
+        if (!array_key_exists($baseUriPartsCount, $dynamicRoutes))
+        {
+            return null;
+        }
+
+        $registeredRoutes = $dynamicRoutes[$baseUriPartsCount];
+
         /** @var Route $route */
         foreach ($registeredRoutes as $path => $route)
         {

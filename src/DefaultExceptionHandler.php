@@ -3,8 +3,9 @@
 namespace Intersect\Http;
 
 use Intersect\Core\Http\Response;
+use Intersect\Http\ExceptionHandler;
 
-class DefaultExceptionHandler {
+class DefaultExceptionHandler implements ExceptionHandler {
 
     public function handle(\Exception $e)
     {

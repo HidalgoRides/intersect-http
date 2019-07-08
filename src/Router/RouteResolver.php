@@ -32,6 +32,11 @@ class RouteResolver {
         }
 
         $routeAction = null;
+
+        if ($baseUri !== '/')
+        {
+            $baseUri = rtrim($baseUri, '/');
+        }
         
         if (array_key_exists($baseUri, $registeredRoutes))
         {

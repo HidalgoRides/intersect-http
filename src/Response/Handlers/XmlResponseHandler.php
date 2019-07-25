@@ -22,7 +22,7 @@ class XmlResponseHandler implements ResponseHandler {
     public function handle(Response $response)
     {
         header('Content-Type: application/xml');
-        echo ArrayToXmlConverter::convert($response->getBody());
+        echo ArrayToXmlConverter::convert($response->getBody(), $response->getOptions());
     }
 
 }

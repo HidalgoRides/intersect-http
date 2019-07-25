@@ -6,17 +6,17 @@ use Intersect\Core\Http\Response;
 
 class XmlResponse extends Response {
 
-    protected $rootElement;
+    protected $options;
 
-    public function __construct(array $body, $rootElement = 'root', int $status = 200)
+    public function __construct(array $body, array $options = [], int $status = 200)
     {
         parent::__construct($body, $status);
-        $this->rootElement = $rootElement;
+        $this->options = $options;
     }
 
-    public function getRootElement()
+    public function getOptions()
     {
-        return $this->rootElement;
+        return $this->options;
     }
 
 }

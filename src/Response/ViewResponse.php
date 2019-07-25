@@ -6,7 +6,6 @@ use Intersect\Core\Http\Response;
 
 class ViewResponse extends Response {
 
-    private $compileRequired = true;
     private $data = [];
     private $viewFile;
 

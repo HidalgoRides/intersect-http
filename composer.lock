@@ -51,12 +51,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/timkippdev/php-array-to-xml-converter.git",
-                "reference": "2a28127b4f897006524443cf5505ccc42c1f63bc"
+                "reference": "63eda4aff8fd6afd4e39c434f844125c1ac288c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/timkippdev/php-array-to-xml-converter/zipball/2a28127b4f897006524443cf5505ccc42c1f63bc",
-                "reference": "2a28127b4f897006524443cf5505ccc42c1f63bc",
+                "url": "https://api.github.com/repos/timkippdev/php-array-to-xml-converter/zipball/63eda4aff8fd6afd4e39c434f844125c1ac288c1",
+                "reference": "63eda4aff8fd6afd4e39c434f844125c1ac288c1",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "php",
                 "xml"
             ],
-            "time": "2019-07-25T06:17:09+00:00"
+            "time": "2019-07-25T07:19:25+00:00"
         }
     ],
     "packages-dev": [
@@ -563,8 +563,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",

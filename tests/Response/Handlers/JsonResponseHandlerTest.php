@@ -3,9 +3,9 @@
 namespace Tests\Http\Response\Handlers;
 
 use PHPUnit\Framework\TestCase;
-use Intersect\Core\Http\Response;
-use Intersect\Http\Response\Handlers\JsonResponseHandler;
+use Intersect\Http\Response\Response;
 use Intersect\Http\Response\JsonResponse;
+use Intersect\Http\Response\Handlers\JsonResponseHandler;
 
 class JsonResponseHandlerTest extends TestCase {
 

@@ -2,8 +2,8 @@
 
 namespace Intersect\Http;
 
-use Intersect\Core\Http\Response;
 use Intersect\Http\ExceptionHandler;
+use Intersect\Http\Response\Response;
 
 class DefaultExceptionHandler implements ExceptionHandler {
 

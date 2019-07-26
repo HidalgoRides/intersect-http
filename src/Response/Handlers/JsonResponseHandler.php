@@ -2,9 +2,9 @@
 
 namespace Intersect\Http\Response\Handlers;
 
-use Intersect\Core\Http\Response;
-use Intersect\Core\Http\ResponseHandler;
+use Intersect\Http\Response\Response;
 use Intersect\Http\Response\JsonResponse;
+use Intersect\Http\Response\Handlers\ResponseHandler;
 
 class JsonResponseHandler implements ResponseHandler {
 

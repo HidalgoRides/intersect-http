@@ -3,9 +3,9 @@
 namespace Tests\Http\Response\Handlers;
 
 use PHPUnit\Framework\TestCase;
-use Intersect\Http\Response\Handlers\TwigResponseHandler;
 use Intersect\Http\Response\TwigResponse;
-use Intersect\Core\Http\Response;
+use Intersect\Http\Response\Response;
+use Intersect\Http\Response\Handlers\TwigResponseHandler;
 
 class TwigResponseHandlerTest extends TestCase {
 

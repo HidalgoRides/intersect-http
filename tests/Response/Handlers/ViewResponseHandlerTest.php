@@ -3,9 +3,9 @@
 namespace Tests\Http\Response\Handlers;
 
 use PHPUnit\Framework\TestCase;
-use Intersect\Core\Http\Response;
-use Intersect\Http\Response\Handlers\ViewResponseHandler;
+use Intersect\Http\Response\Response;
 use Intersect\Http\Response\ViewResponse;
+use Intersect\Http\Response\Handlers\ViewResponseHandler;
 
 class ViewResponseHandlerTest extends TestCase {
 

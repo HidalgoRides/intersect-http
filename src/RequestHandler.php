@@ -5,9 +5,9 @@ namespace Intersect\Http;
 use Intersect\Core\ClosureInvoker;
 use Intersect\Core\Container;
 use Intersect\Core\Http\Request;
-use Intersect\Core\Http\Response;
 use Intersect\Core\MethodInvoker;
 use Intersect\Http\ExceptionHandler;
+use Intersect\Http\Response\Response;
 use Intersect\Http\Router\RouteRegistry;
 use Intersect\Http\Router\RouteResolver;
 

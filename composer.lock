@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38581188caaadcbcf904d22ee527d556",
+    "content-hash": "6d1fe804dbc7ec1bdecadaed13c069a3",
     "packages": [
         {
             "name": "hidalgo-rides/intersect-core",
-            "version": "1.1.1",
+            "version": "dev-feature/xml-response-handler",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HidalgoRides/intersect-core.git",
-                "reference": "b46beef5cc848b5cf1d920659f96f1deba1e3d79"
+                "reference": "2ff35e64f7b0b5d23767daef4ff4da789b436ec3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HidalgoRides/intersect-core/zipball/b46beef5cc848b5cf1d920659f96f1deba1e3d79",
-                "reference": "b46beef5cc848b5cf1d920659f96f1deba1e3d79",
+                "url": "https://api.github.com/repos/HidalgoRides/intersect-core/zipball/2ff35e64f7b0b5d23767daef4ff4da789b436ec3",
+                "reference": "2ff35e64f7b0b5d23767daef4ff4da789b436ec3",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
                 }
             ],
             "description": "Common classes used throughout Intersect libraries and projects.",
-            "time": "2019-07-08T06:09:49+00:00"
+            "time": "2019-07-26T06:31:36+00:00"
         },
         {
             "name": "timkippdev/array-to-xml-converter",
@@ -1567,7 +1567,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "hidalgo-rides/intersect-core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

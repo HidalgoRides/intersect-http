@@ -3,9 +3,7 @@
 namespace Tests\Http\Response\Handlers;
 
 use PHPUnit\Framework\TestCase;
-use Intersect\Http\Response\Handlers\StringResponseHandler;
-use Intersect\Core\Http\Response;
-use Intersect\Http\DefaultExceptionHandler;
+use Intersect\Http\Response\Response;
 use Intersect\Http\Response\Handlers\DefaultResponseHandler;
 
 class DefaultResponseHandlerTest extends TestCase {

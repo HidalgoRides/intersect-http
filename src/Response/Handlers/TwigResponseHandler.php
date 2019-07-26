@@ -4,9 +4,9 @@ namespace Intersect\Http\Response\Handlers;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-use Intersect\Core\Http\Response;
-use Intersect\Core\Http\ResponseHandler;
+use Intersect\Http\Response\Response;
 use Intersect\Http\Response\TwigResponse;
+use Intersect\Http\Response\Handlers\ResponseHandler;
 
 /**
  * composer dependencies required

@@ -2,9 +2,9 @@
 
 namespace Intersect\Http\Response\Handlers;
 
-use Intersect\Core\Http\Response;
-use Intersect\Core\Http\ResponseHandler;
+use Intersect\Http\Response\Response;
 use Intersect\Http\Response\ViewResponse;
+use Intersect\Http\Response\Handlers\ResponseHandler;
 
 class ViewResponseHandler implements ResponseHandler {
 

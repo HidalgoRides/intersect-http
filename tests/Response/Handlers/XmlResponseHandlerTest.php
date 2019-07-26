@@ -3,9 +3,9 @@
 namespace Tests\Http\Response\Handlers;
 
 use PHPUnit\Framework\TestCase;
-use Intersect\Core\Http\Response;
-use Intersect\Http\Response\Handlers\XmlResponseHandler;
+use Intersect\Http\Response\Response;
 use Intersect\Http\Response\XmlResponse;
+use Intersect\Http\Response\Handlers\XmlResponseHandler;
 
 class XmlResponseHandlerTest extends TestCase {
 

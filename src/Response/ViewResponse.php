@@ -2,9 +2,7 @@
 
 namespace Intersect\Http\Response;
 
-use Intersect\Http\Response\Response;
-
-class ViewResponse extends Response {
+class ViewResponse extends AbstractResponse {
 
     private $data = [];
     private $viewFile;
@@ -17,14 +15,12 @@ class ViewResponse extends Response {
         parent::__construct(null, $status);
     }
 
-    public function getViewFile()
+    public function handle($templatePath = null)
     {
-        return $this->viewFile;
-    }
+        $templatePath = rtrim($templatePath, '/');
 
-    public function getData()
-    {
-        return $this->data;
+        extract($this->data);
+        require_once $templatePath . '/' . ltrim($this->viewFile, '/');
     }
 
 }

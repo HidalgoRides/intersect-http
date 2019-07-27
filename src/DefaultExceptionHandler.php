@@ -3,13 +3,13 @@
 namespace Intersect\Http;
 
 use Intersect\Http\ExceptionHandler;
-use Intersect\Http\Response\Response;
+use Intersect\Http\Response\StandardResponse;
 
 class DefaultExceptionHandler implements ExceptionHandler {
 
     public function handle(\Exception $e)
     {
-        return new Response($this->getErrorMessage($e), 500);
+        return new StandardResponse($this->getErrorMessage($e), 500);
     }
 
     private function getErrorMessage(\Exception $e)

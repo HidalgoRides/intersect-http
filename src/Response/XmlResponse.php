@@ -2,9 +2,9 @@
 
 namespace Intersect\Http\Response;
 
-use Intersect\Http\Response\Response;
+use TimKippDev\ArrayToXmlConverter\ArrayToXmlConverter;
 
-class XmlResponse extends Response {
+class XmlResponse extends AbstractResponse {
 
     protected $options;
 
@@ -14,9 +14,10 @@ class XmlResponse extends Response {
         $this->options = $options;
     }
 
-    public function getOptions()
+    public function handle()
     {
-        return $this->options;
+        header('Content-Type: application/xml');
+        echo ArrayToXmlConverter::convert($this->getBody(), $this->options);
     }
 
 }

@@ -2,14 +2,15 @@
 
 namespace Intersect\Http;
 
-use Intersect\Core\ClosureInvoker;
 use Intersect\Core\Container;
 use Intersect\Core\Http\Request;
 use Intersect\Core\MethodInvoker;
+use Intersect\Core\ClosureInvoker;
 use Intersect\Http\ExceptionHandler;
 use Intersect\Http\Response\Response;
 use Intersect\Http\Router\RouteRegistry;
 use Intersect\Http\Router\RouteResolver;
+use Intersect\Http\Response\StandardResponse;
 
 class RequestHandler {
 
@@ -99,7 +100,7 @@ class RequestHandler {
 
         if (!$response instanceof Response)
         {
-            $response = new Response($response);
+            $response = new StandardResponse($response);
         }
 
         return $response;

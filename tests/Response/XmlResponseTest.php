@@ -3,34 +3,18 @@
 namespace Tests\Http\Response\Handlers;
 
 use PHPUnit\Framework\TestCase;
-use Intersect\Http\Response\Response;
 use Intersect\Http\Response\XmlResponse;
-use Intersect\Http\Response\Handlers\XmlResponseHandler;
 
-class XmlResponseHandlerTest extends TestCase {
-
-    public function test_canHandle_valid()
-    {
-        $xmlResponseHandler = new XmlResponseHandler();
-        $this->assertTrue($xmlResponseHandler->canHandle(new XmlResponse(['unit' => 'test'])));   
-    }
-
-    public function test_canHandle_invalid()
-    {
-        $xmlResponseHandler = new XmlResponseHandler();
-        $this->assertFalse($xmlResponseHandler->canHandle(new Response('test')));
-    }
+class XmlResponseTest extends TestCase {
 
     /**
      * @runInSeparateProcess
      */
     public function test_handle()
     {
-        $xmlResponseHandler = new XmlResponseHandler();
-
         ob_start();
         
-        $xmlResponseHandler->handle(new XmlResponse([
+        $xmlResponse = new XmlResponse([
             'unit' => 'test',
             'foo' => [
                 'bar' => 'bell'
@@ -39,7 +23,8 @@ class XmlResponseHandlerTest extends TestCase {
                 ['shell' => 'soft'],
                 ['shell' => 'hard']
             ]
-        ]));   
+        ]);
+        $xmlResponse->handle();
         
         $response = ob_get_clean();
 

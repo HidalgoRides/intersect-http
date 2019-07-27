@@ -2,6 +2,12 @@
 
 namespace Intersect\Http\Response;
 
-use Intersect\Http\Response\Response;
+class JsonResponse extends AbstractResponse {
 
-class JsonResponse extends Response {}
+    public function handle()
+    {
+        header('Content-Type: application/json');
+        echo json_encode($this->getBody());
+    }
+
+}

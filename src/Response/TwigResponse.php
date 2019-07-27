@@ -2,9 +2,14 @@
 
 namespace Intersect\Http\Response;
 
-use Intersect\Http\Response\Response;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
-class TwigResponse extends Response {
+/**
+ * composer dependencies required
+ * "twig/twig": "^2.0",
+ */
+class TwigResponse extends AbstractResponse {
 
     private $data = [];
     private $templateFile;
@@ -17,14 +22,25 @@ class TwigResponse extends Response {
         $this->templateFile = $templateFile;
     }
 
-    public function getData()
+    public function handle($templatesPath = null, $configs = [])
     {
-        return $this->data;
-    }
+        $loader = new FilesystemLoader($templatesPath);
 
-    public function getTemplateFile()
-    {
-        return $this->templateFile;
+        $options = (array_key_exists('options', $configs) ? $configs['options'] : []);
+        $extensions = (array_key_exists('extensions', $configs) ? $configs['extensions'] : []);
+
+        $twig = new Environment($loader, $options);
+
+        foreach ($extensions as $extension)
+        {
+            $extensionInstace = new $extension();
+            if ($extensionInstace instanceof \Twig_ExtensionInterface)
+            {
+                $twig->addExtension($extensionInstace);
+            }
+        }
+
+        echo $twig->render($this->templateFile, $this->data);
     }
 
 }

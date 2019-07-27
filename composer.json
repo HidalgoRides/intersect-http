@@ -21,7 +21,7 @@
     }
   },
   "require": {
-    "hidalgo-rides/intersect-core": "dev-feature/xml-response-handler",
+    "hidalgo-rides/intersect-core": "1.1.*",
     "timkippdev/array-to-xml-converter": "1.0.*"
   },
   "require-dev": {

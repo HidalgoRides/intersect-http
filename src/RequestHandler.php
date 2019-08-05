@@ -52,6 +52,7 @@ class RequestHandler {
 
     /**
      * @param Request $request
+     * @return Response
      * @throws \Exception
      */
     public function handle(Request $request)

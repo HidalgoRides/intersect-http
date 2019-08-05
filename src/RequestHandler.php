@@ -7,6 +7,7 @@ use Intersect\Core\Http\Request;
 use Intersect\Core\MethodInvoker;
 use Intersect\Core\ClosureInvoker;
 use Intersect\Http\ExceptionHandler;
+use Intersect\Core\ParameterResolver;
 use Intersect\Http\Response\Response;
 use Intersect\Http\Router\RouteRegistry;
 use Intersect\Http\Router\RouteResolver;
@@ -34,12 +35,13 @@ class RequestHandler {
     /**
      * RequestHandler constructor.
      */
-    public function __construct(Container $container, RouteRegistry $routeRegistry, ClosureInvoker $closureInvoker, MethodInvoker $methodInvoker, ExceptionHandler $customExceptionHandler = null)
+    public function __construct(Container $container, RouteRegistry $routeRegistry, ExceptionHandler $customExceptionHandler = null)
     {
+        $parameterResolver = new ParameterResolver($container->getClassResolver());
+        $this->closureInvoker = new ClosureInvoker($parameterResolver);
+        $this->methodInvoker = new MethodInvoker($parameterResolver);
+        
         $this->container = $container;
-        $this->closureInvoker = $closureInvoker;
-        $this->methodInvoker = $methodInvoker;
-
         $this->routeResolver = new RouteResolver($routeRegistry);
 
         $this->exceptionHandler = (!is_null($customExceptionHandler)) ? $customExceptionHandler : new DefaultExceptionHandler();
@@ -106,7 +108,5 @@ class RequestHandler {
 
         return $response;
     }
-
-
 
 }

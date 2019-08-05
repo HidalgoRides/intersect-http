@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/HidalgoRides/intersect-core.git",
-                "reference": "8c41b1717f175bfb59e1b4359ab510ef40219499"
+                "reference": "767e36aecc54e621013f3f7cf0a0ca18ef72e1e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HidalgoRides/intersect-core/zipball/8c41b1717f175bfb59e1b4359ab510ef40219499",
-                "reference": "8c41b1717f175bfb59e1b4359ab510ef40219499",
+                "url": "https://api.github.com/repos/HidalgoRides/intersect-core/zipball/767e36aecc54e621013f3f7cf0a0ca18ef72e1e2",
+                "reference": "767e36aecc54e621013f3f7cf0a0ca18ef72e1e2",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
                 }
             ],
             "description": "Common classes used throughout Intersect libraries and projects.",
-            "time": "2019-08-05T01:44:52+00:00"
+            "time": "2019-08-05T05:45:25+00:00"
         },
         {
             "name": "timkippdev/array-to-xml-converter",

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32f53b0bf15bedbcf2a7590acf226c07",
+    "content-hash": "3edabb93b9141ce5e734ca3f910e171e",
     "packages": [
         {
             "name": "hidalgo-rides/intersect-core",
-            "version": "1.1.2",
+            "version": "dev-release/1.2.x",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HidalgoRides/intersect-core.git",
-                "reference": "04c99467582dfd9bc4ccf1072876dea1e790353e"
+                "reference": "8c41b1717f175bfb59e1b4359ab510ef40219499"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HidalgoRides/intersect-core/zipball/04c99467582dfd9bc4ccf1072876dea1e790353e",
-                "reference": "04c99467582dfd9bc4ccf1072876dea1e790353e",
+                "url": "https://api.github.com/repos/HidalgoRides/intersect-core/zipball/8c41b1717f175bfb59e1b4359ab510ef40219499",
+                "reference": "8c41b1717f175bfb59e1b4359ab510ef40219499",
                 "shasum": ""
             },
             "require": {
@@ -43,20 +43,20 @@
                 }
             ],
             "description": "Common classes used throughout Intersect libraries and projects.",
-            "time": "2019-07-27T03:00:42+00:00"
+            "time": "2019-08-05T01:44:52+00:00"
         },
         {
             "name": "timkippdev/array-to-xml-converter",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/timkippdev/php-array-to-xml-converter.git",
-                "reference": "63eda4aff8fd6afd4e39c434f844125c1ac288c1"
+                "reference": "eadc2a8f72c9d06d5948e67de61bb9e9ba9925d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/timkippdev/php-array-to-xml-converter/zipball/63eda4aff8fd6afd4e39c434f844125c1ac288c1",
-                "reference": "63eda4aff8fd6afd4e39c434f844125c1ac288c1",
+                "url": "https://api.github.com/repos/timkippdev/php-array-to-xml-converter/zipball/eadc2a8f72c9d06d5948e67de61bb9e9ba9925d7",
+                "reference": "eadc2a8f72c9d06d5948e67de61bb9e9ba9925d7",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "php",
                 "xml"
             ],
-            "time": "2019-07-25T07:19:25+00:00"
+            "time": "2019-07-28T04:42:54+00:00"
         }
     ],
     "packages-dev": [
@@ -1693,7 +1693,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "hidalgo-rides/intersect-core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
